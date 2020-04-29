@@ -1,5 +1,5 @@
 # home-camera
-Laptop + Python3 + CV2 + GoogleDrive + Schedule
+Laptop + Python3 + CV2 + GoogleDrive + Schedule  
 自宅のノートパソコン（カメラ付き）で10分毎に撮った写真をGoogleDriveにアップロードして、スマホから閲覧する。
 
 ## install
