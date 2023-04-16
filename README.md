@@ -66,3 +66,40 @@ https://deviceplus.jp/mc-general/m5stack-intercom-camera-1/
 RISC-Vベースの“AIoTカメラ”であるM5StickVをUbuntuで使う  
 https://gihyo.jp/admin/serial/01/ubuntu-recipe/0587  
 
+## 参考script
+```python
+import serial
+import time
+import datetime
+
+ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=0.1)
+f = open('out.txt', 'a')
+mini = 0
+s = set()
+while True:
+    time.sleep(0.1)
+    result = ser.read_all()
+    if result:
+        minini = datetime.datetime.now().minute
+        if (mini != minini):
+            mini = minini
+            s = set()
+            print('******************************************************')
+        re = str(result)[2:]
+        re = re[:len(re)-5]
+        re = re.replace('\\r\\n', '')
+        re = re.replace('\r', '')
+        re = re.replace('\n', '')
+        re = re.replace('1:', '\n2:')
+        re = re.replace('3:', '4: ' + str(datetime.datetime.now()) + ', 5:')
+        if not re.split(',')[0] in s:
+            s.add(re.split(',')[0])
+            if re != '':
+                print(re.strip('\n'))
+            f.write(re[:re.find('6:')+3])
+    if result == b'\r':    # <Enter>で終了
+        break
+print('program end')
+ser.close()
+```
+
