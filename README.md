@@ -1,16 +1,16 @@
-# home-camera
+# 1. Home Camera to GoogleDrive
+自宅のノートパソコン（カメラ付き）で10分毎に撮った写真をGoogleDriveにアップロードして、スマホから閲覧する。  
 Laptop + Python3 + CV2 + GoogleDrive + Schedule  
-自宅のノートパソコン（カメラ付き）で10分毎に撮った写真をGoogleDriveにアップロードして、スマホから閲覧する。
 
 ## install
-```
+```bash
 pip install opencv-python
 pip install pydrive
 pip install schedule
 ```
 
 ## script
-```
+```python
 import schedule
 import time
 import cv2
@@ -50,3 +50,19 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+
+# 2. Home Camera RaspberryPi to Line
+自宅のM5StickV(カメラ)及びRaspberryPi4から、Lineへ画像を送信する。
+
+参考  
+
+M5StickC M5StickVを使った簡易監視装置を作ってみる  
+https://www.slideshare.net/tomit3/m5stickc-m5stickv  
+https://github.com/tomitomi3/SimpleHomeSurveillanceWithM5StickCV  
+
+M5StackでつくるAI機械学習機能搭載インターフォンカメラ  
+https://deviceplus.jp/mc-general/m5stack-intercom-camera-1/  
+
+RISC-Vベースの“AIoTカメラ”であるM5StickVをUbuntuで使う  
+https://gihyo.jp/admin/serial/01/ubuntu-recipe/0587  
+
