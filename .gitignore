@@ -1,5 +1,4 @@
-*.py
 *.json
 *.yaml
 *.jpg
-
+out.txt
