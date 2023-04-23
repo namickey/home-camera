@@ -2,7 +2,14 @@
 ./shutter.sh
 ret=$?
 if [ ${RET} -eq 1 ]; then
-  echo 'error'
+  echo 'shutter.sh error'
+  exit 1
+fi
+
+./line-push.sh
+ret=$?
+if [ ${RET} -eq 1 ]; then
+  echo 'line-push.sh error'
   exit 1
 fi
 
@@ -11,4 +18,3 @@ kill -9 $python_pid
 
 cd image
 ./server.sh &
-

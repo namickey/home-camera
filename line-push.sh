@@ -1,5 +1,6 @@
 
-
+filename=`ls -t image/all | head -n1`
+s3url=$line_home_s3/$filename
 uuid=$(< /proc/sys/kernel/random/uuid)
 curl -v -X POST https://api.line.me/v2/bot/message/push \
 -H 'Content-Type: application/json' \
@@ -14,9 +15,8 @@ curl -v -X POST https://api.line.me/v2/bot/message/push \
         },
         {
             "type": "image",
-            "originalContentUrl": "xxxx",
-            "previewImageUrl": "xxxx"
+            "originalContentUrl": "'$s3url'",
+            "previewImageUrl": "'$s3url'"
         }
     ]
 }'
-
