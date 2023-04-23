@@ -6,7 +6,8 @@ if [ ${RET} -eq 1 ]; then
   exit 1
 fi
 
-kill -9 `pidof python`
+python_pid=`pgrep -f 'python -m http.server'`
+kill -9 $python_pid
 
 cd image
 ./server.sh &
