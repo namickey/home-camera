@@ -1,7 +1,8 @@
-import image, lcd, sensor
+import image, sensor
+#import lcd
 from pmu import axp192
-lcd.init()
-lcd.rotation(2)
+#lcd.init()
+#lcd.rotation(2)
 time.sleep(0.1)
 
 #電源管理
@@ -21,7 +22,7 @@ while 1:
 sensor.set_pixformat(sensor.RGB565)
 sensor.set_framesize(sensor.QVGA) #QVGA=320x240
 sensor.run(1)
-time.sleep(0.2)
+time.sleep(0.5)
 
 #カメラから画像取得
 img_org = sensor.snapshot()
@@ -29,11 +30,11 @@ img_org = sensor.snapshot()
 #加工前にコピー 送信用に加工
 img_buf = img_org.copy()
 img_buf = img_buf.resize(240,160)
-img_buf.compress(quality=60)
+img_buf.compress(quality=50)
 
 #確認用に表示 カメラの比率
-img_org.draw_string(50,50, "home", color=(255,0,0), scale=2, mono_space=False)
-lcd.display(img_org)
+#img_org.draw_string(50,50, "home", color=(255,0,0), scale=2, mono_space=False)
+#lcd.display(img_org)
 
 #print('img_buf:dir:')
 #print(dir(img_buf))
