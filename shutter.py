@@ -1,8 +1,6 @@
 import serial
 import time
 import datetime
-import subprocess
-from subprocess import PIPE
 
 # send mode
 #moji='shuttermode\r\n'
@@ -43,14 +41,6 @@ while True:
                         f.close()
                         ser.close()
                         print('shutter done.')
-                        subprocess.run(["pwd"])
-                        #proc=subprocess.run("./move-and-s3up.sh", shell=True, stdout=PIPE, stderr=PIPE, text=True)
-                        subprocess.run("bash -c 'source ~/.bashrc && ./move-and-s3up.sh'")
-                        #print(proc.stdout)
-                        #print(proc.stderr)
-                        #import s3up
-                        #print(proc.stdout)
-                        #print(proc.stderr)
                         break
                 d = ''
                 i = 0
