@@ -3,4 +3,5 @@
 *.jpg
 out.txt
 *.jpeg
+__pycache__/
 

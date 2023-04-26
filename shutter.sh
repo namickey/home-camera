@@ -1,6 +1,6 @@
-python serial_image.py
+python shutter.py
 ret=$?
-echo "exit:$ret"
-nowdate=`date "+%Y%m%d-%H%M%S"`
-uuid=$(< /proc/sys/kernel/random/uuid)
-cp image/out.jpeg image/all/home-${nowdate}_${uuid}.jpeg
+if [ ${ret} -eq 1 ]; then
+  echo 'shutter.py error'
+  exit 1
+fi
