@@ -13,7 +13,7 @@ fm.register(board_info.LED_B, fm.fpioa.GPIO6)
 
 #電源管理
 pmu = axp192()
-pmu.setScreenBrightness(10) # 8だとちらつく
+pmu.setScreenBrightness(10)
 time.sleep(0.2)
 
 while 1:
@@ -28,19 +28,19 @@ while 1:
 sensor.set_pixformat(sensor.RGB565)
 sensor.set_framesize(sensor.QVGA) #QVGA=320x240
 sensor.run(1)
-time.sleep(0.5)
+time.sleep(0.2)
 
 # ボタン押下待ち
 fm.register(board_info.BUTTON_A, fm.fpioa.GPIO1)
 but_a=GPIO(GPIO.GPIO1, GPIO.IN, GPIO.PULL_UP)
 while 1:
 	if but_a.value() == 0:
+		#カメラから画像取得
+		img_org = sensor.snapshot()
+
 		# LED ON
 		led_r = GPIO(GPIO.GPIO6, GPIO.OUT)
 		led_r.value(0)
-
-		#カメラから画像取得
-		img_org = sensor.snapshot()
 
 		#加工前にコピー 送信用に加工
 		img_buf = img_org.copy()
@@ -54,10 +54,11 @@ while 1:
 		# LED OFF
 		led_r.value(1)
 
-		# 送信
+		# jpegデータ送信
 		aa= img_buf.to_bytes()
 		bb = ''.join(['{:02x}'.format(b) for b in aa])
 		print(bb)
+		# jpegデータ送信後の文字列を送信
 		print('MicroPython')
 		# LCD OFF
 		time.sleep(3.0)
