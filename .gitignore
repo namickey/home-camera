@@ -4,4 +4,6 @@
 out.txt
 *.jpeg
 __pycache__/
-
+arp.txt
+tmp.txt
+count.txt

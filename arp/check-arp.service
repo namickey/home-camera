@@ -1,0 +1,12 @@
+[Unit]
+Description=check arp
+
+[Service]
+User=xxxxx
+Group=xxxxx
+Type=oneshot
+ExecStart=/bin/bash /home/xxxxx/github/home-camera/arp/check-arp.sh
+WorkingDirectory=/home/xxxxx/github/home-camera/arp
+
+[Install]
+WantedBy=multi-user.target

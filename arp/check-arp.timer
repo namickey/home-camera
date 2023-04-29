@@ -1,0 +1,11 @@
+[Unit]
+Description=check arp
+After=network.target
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=1min
+Unit=check-arp.service
+
+[Install]
+WantedBy=timers.target
