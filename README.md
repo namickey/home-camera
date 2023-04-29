@@ -103,3 +103,8 @@ print('program end')
 ser.close()
 ```
 
+# 3. arp-scan
+
+```
+sudo arp-scan 192.168.1.1/24 | grep 192.168 | grep -v Interface > arp.txt
+```
