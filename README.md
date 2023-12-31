@@ -51,8 +51,8 @@ if __name__ == '__main__':
     main()
 ```
 
-# 2. Home Camera RaspberryPi to Line
-自宅のM5StickV(カメラ)及びRaspberryPi4から、Lineへ画像を送信する。
+# 2. Home Camera RaspberryPi to LINE
+自宅のM5StickV(カメラ)及びRaspberryPi4から、LINEへ画像を送信する。
 
 参考  
 
@@ -104,16 +104,17 @@ ser.close()
 ```
 
 # 3. arp-scan
-
+自宅のRaspberryPi4から、arpスキャン結果に指定MACアドレスが含まれていたら、一時間毎にLINEへ通知する。
 ```
 sudo arp-scan 192.168.1.1/24 | grep 192.168 | grep -v Interface > arp.txt
 ```
 
 # 4. LINE風WEB掲示板
+スマホやPCのブラウザからLINE風掲示板を使う。※WEBアプリなので特に通知は無し
 
-Flask + Redis + DockerCompose
+Flask + Redis + DockerCompose  
 https://github.com/namickey/docker-compose-training/tree/master/01_chat_app/dockercompose  
 
-AWS + Terraform
+AWS + Terraform  
 https://github.com/namickey/terraform-try  
 
