@@ -118,3 +118,13 @@ https://github.com/namickey/docker-compose-training/tree/master/01_chat_app/dock
 AWS + Terraform  
 https://github.com/namickey/terraform-try  
 
+# 5. Cloudflare チャット
+10件だけメッセージを保管できるWEBチャット  
+またLINE通知も可能  
+
+CloudflareWorkers+Hono+HTMX+KV+LINE  
+https://github.com/namickey/hono-htmx-chat  
+
+# 6. SmartTracker Bluetooth Low Energy Scanner
+紛失防止トラッカーが検知できなくなったら、LINE通知する
+
