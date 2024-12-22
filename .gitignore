@@ -8,4 +8,4 @@ arp.txt
 tmp.txt
 count.txt
 *.log
-
+.venv1/

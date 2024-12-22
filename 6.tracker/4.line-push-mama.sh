@@ -13,7 +13,7 @@ curl -v -X POST https://api.line.me/v2/bot/message/push \
     "messages":[
         {
             "type":"text",
-            "text":"わかなはチアへ出発しました。"
+            "text":"わかは家を出発しました。"
         }
     ]
 }'
