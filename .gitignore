@@ -7,3 +7,5 @@ __pycache__/
 arp.txt
 tmp.txt
 count.txt
+*.log
+
