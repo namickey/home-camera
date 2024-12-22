@@ -3,8 +3,8 @@ Description=ble scan
 After=network.target
 
 [Timer]
-OnCalendar=Mon *-*-* 16:00:00
-Persistent=true
+OnCalendar=Mon *-*-* 17:00:00
+Persistent=false
 Unit=ble-scan.service
 
 [Install]
