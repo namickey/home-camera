@@ -1,0 +1,13 @@
+[Unit]
+Description=delete-stopfile
+
+[Service]
+User=xxxxx
+Group=xxxxx
+Type=oneshot
+EnvironmentFile=/home/xxxxx/daemon.config
+ExecStart=/bin/bash /home/xxxxx/github/home-camera/6.tracker/6.delete-stopfile.sh
+WorkingDirectory=/home/xxxxx/github/home-camera/6.tracker
+
+[Install]
+WantedBy=multi-user.target

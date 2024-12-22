@@ -1,0 +1,11 @@
+[Unit]
+Description=ble scan
+After=network.target
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=3min
+Unit=ble-scan.service
+
+[Install]
+WantedBy=timers.target
