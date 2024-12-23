@@ -1,10 +1,10 @@
 
 if [ -f "stop-file.txt" ]; then
-    echo "Stop file exists. Exiting."
+    echo $(date +"%Y-%m-%d %H:%M:%S") "Stop file exists. Exiting." | tee -a app.log
     exit 0
 fi
 
-echo "Starting BLE scan service."
+echo $(date +"%Y-%m-%d %H:%M:%S") "Starting BLE scan service." | tee -a app.log
 
 sudo ./1.scan_ble.sh
 

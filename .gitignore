@@ -9,3 +9,5 @@ tmp.txt
 count.txt
 *.log
 .venv1/
+stop-file.txt
+
