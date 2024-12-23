@@ -31,8 +31,30 @@
     * LINE通知後は`STOPファイル`を配置し、LINE通知を停止する
     * 平日夜までに外出が無い場合は、`STOPファイル`を配置する
 
-## setup
+## setup for service
+```sh
+# サービスファイルの再読み込み　※必須
+sudo systemctl daemon-reload
+# サービスの再起動　※必須
+sudo systemctl restart ble-scan.timer
+sudo systemctl restart ble-scan.service
+sudo systemctl restart ble-stop-end.timer
+sudo systemctl restart ble-stop-end.service
+# サービス自動起動有効化　※必須
+sudo systemctl enable ble-scan.timer
+sudo systemctl enable ble-scan.service
+sudo systemctl enable ble-stop-end.timer
+sudo systemctl enable ble-stop-end.service
+# サービスステータス確認
+systemctl status ble-scan.timer
+systemctl status ble-scan.service
+systemctl status ble-stop-end.timer
+systemctl status ble-stop-end.service
+# タイマー確認
+sudo systemctl list-timers
+```
 
+## setup for python
 ```sh
 python -m venv .venv1
 source .venv1/bin/activate
