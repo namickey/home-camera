@@ -1,6 +1,6 @@
 
 if [ -f "stop-file.txt" ]; then
-    echo $(date +"%Y-%m-%d %H:%M:%S") "Stop file exists. Exiting." | tee -a app.log
+    echo $(date +"%Y-%m-%d %H:%M:%S") "Stop file exists." | tee -a app.log
     exit 0
 fi
 
