@@ -3,8 +3,8 @@ Description=ble scan
 After=network.target
 
 [Timer]
-OnBootSec=2min
-OnUnitActiveSec=3min
+OnBootSec=1min
+OnUnitActiveSec=1min
 Unit=ble-scan.service
 
 [Install]
