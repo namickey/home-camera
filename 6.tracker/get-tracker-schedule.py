@@ -1,6 +1,7 @@
 import requests
 import datetime
 
+# スケジュールを取得
 url = "https://namickey.github.io/home-camera/tracker.json"
 response = requests.get(url)
 data = response.json()
@@ -11,12 +12,10 @@ print(a)
 start_time = a[0]["start_time"]
 end_time = a[0]["end_time"]
 
-#start_time = "18:00"
-#end_time = "23:00"
-
+# 現在時刻を取得
 current_time = datetime.datetime.now().strftime('%H:%M')
-#print(f"Current time: {current_time}")
 
+# 判定
 if start_time <= current_time <= end_time:
     print("true")
     exit(0)
