@@ -38,18 +38,12 @@ sudo systemctl daemon-reload
 # サービスの再起動　※必須
 sudo systemctl restart ble-scan.timer
 sudo systemctl restart ble-scan.service
-sudo systemctl restart ble-stop-end.timer
-sudo systemctl restart ble-stop-end.service
 # サービス自動起動有効化　※必須
 sudo systemctl enable ble-scan.timer
 sudo systemctl enable ble-scan.service
-sudo systemctl enable ble-stop-end.timer
-sudo systemctl enable ble-stop-end.service
 # サービスステータス確認
 systemctl status ble-scan.timer
 systemctl status ble-scan.service
-systemctl status ble-stop-end.timer
-systemctl status ble-stop-end.service
 # タイマー確認
 sudo systemctl list-timers
 ```
