@@ -6,6 +6,6 @@ fi
 
 echo $(date +"%Y-%m-%d %H:%M:%S") "Starting BLE scan service." | tee -a app.log
 
-sudo ./1.scan_ble.sh
+sudo ./2.scan_ble.sh
 
-./2.check_log.sh
+./3.check_log.sh

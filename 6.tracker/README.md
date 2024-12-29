@@ -1,6 +1,6 @@
 # スマートトラッカーで外出検知
 
-![構成図](app.png)
+![構成図](system.png)
 
 ## requirements
 
