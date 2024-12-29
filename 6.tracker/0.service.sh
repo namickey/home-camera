@@ -1,3 +1,4 @@
+./1.check-schedule.sh
 
 if [ -f "stop-file.txt" ]; then
     echo $(date +"%Y-%m-%d %H:%M:%S") "Stop file exists." | tee -a app.log
