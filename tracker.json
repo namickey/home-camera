@@ -4,7 +4,7 @@
             {
                 "day_of_week": "Monday",
                 "start_time": "17:00",
-                "end_time": "18:00"
+                "end_time": "17:30"
             },
             {
                 "day_of_week": "Tuesday",
@@ -33,8 +33,8 @@
             },
             {
                 "day_of_week": "Sunday",
-                "start_time": "22:05",
-                "end_time": "22:09"
+                "start_time": "Closed",
+                "end_time": "Closed"
             }
         ]
     }
