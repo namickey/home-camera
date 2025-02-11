@@ -1,4 +1,3 @@
-*.json
 *.yaml
 *.jpg
 out.txt
@@ -10,4 +9,5 @@ count.txt
 *.log
 .venv1/
 stop-file.txt
-
+node_modules/
+*.key
