@@ -1,5 +1,11 @@
 # discord + jtalk
 
+### jtalkインストール
+```bash
+sudo apt install open-jtalk open-jtalk-mecab-naist-jdic
+```
+
+### 音声ダウンロード
 ```bash
 # 1. 作業用ディレクトリで、MMDAgentのサンプルパッケージをダウンロード
 cd /tmp
@@ -18,10 +24,11 @@ sudo mkdir -p /usr/share/hts-voice/mei
 sudo cp MMDAgent_Example-1.8/Voice/mei/*.htsvoice /usr/share/hts-voice/mei/
 ```
 
+### 疎通
 ```bash
 echo "こんにちは、きこえますか" | open_jtalk \
   -x /var/lib/mecab/dic/open-jtalk/naist-jdic \
-  -m /usr/share/hts-voice/mei/mei_normal.htsvoice \
-  -ow /tmp/test.wav
-aplay /tmp/test.wav
+  -m ./mei_normal.htsvoice \
+  -ow ./tmp/test.wav
+aplay ./tmp/test.wav
 ```

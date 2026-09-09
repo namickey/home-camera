@@ -11,3 +11,4 @@ count.txt
 stop-file.txt
 node_modules/
 *.key
+tmp/
