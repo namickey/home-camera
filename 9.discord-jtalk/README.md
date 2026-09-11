@@ -32,3 +32,31 @@ echo "こんにちは、きこえますか" | open_jtalk \
   -ow ./tmp/test.wav
 aplay ./tmp/test.wav
 ```
+
+### home.py / discordjtalk.py の実行
+
+トークンはコミットせず、環境変数で渡す。
+
+```bash
+DISCORD_TOKEN="xxxxxxxxxx" python3 home.py
+```
+
+## その他
+
+```bash
+sudo apt install mpv
+
+# 古いyoutube-dlが入っていれば削除
+sudo apt remove youtube-dl
+
+# yt-dlpを最新版でインストール
+sudo apt install python3-pip
+pip3 install --break-system-packages -U yt-dlp
+
+# パスが通っているか確認（~/.local/bin に入る）
+yt-dlp --version
+
+mpv --no-video https://www.youtube.com/xxxxxxxxxxxxxxxxxxx
+```
+
+
