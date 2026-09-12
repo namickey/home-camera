@@ -10,6 +10,7 @@
 | home.py の副作用を `__main__` ガード化 | 完了 | 2026-09-13 | `TOKEN` 取得と `client.run(TOKEN)` を `if __name__ == "__main__":` に移動。ロジック関数には変更なし。`DISCORD_TOKEN` 未設定でも `import home` できることを確認済み |
 | requirements.txt 作成 | 完了 | 2026-09-13 | discord.py==2.7.1(開発機の実インストール版) / pytest==9.1.1 / pytest-asyncio==1.4.0 / pytest-mock==3.15.1 を固定。README.md に `pip install -r requirements.txt` の手順を追記 |
 | tests/conftest.py 作成 | 完了 | 2026-09-13 | `mock_popen`(Popen)/`mock_run`(open_jtalk用run)フィクスチャ、テスト間で `home` のグローバル状態(実行中プロセス・キュー)をリセットする `reset_home_state`(autouse)を追加。requirements.txtをインストールしスモークテストで動作確認済み(コミット前に削除) |
+| テストに使用するコマンドを整理する(AI実行/人実行) | 進行中 | 2026-09-13 | CLAUDE.md に「テストコマンド」節を追加。AIが自律実行してよいコマンド(`pip install -r requirements.txt` / `pytest`)と、実機・実Discord依存で人が実行するコマンド(`python3 src/home.py` 起動・疎通確認・shutdown.sh/volume.sh)を分離して明記。コミット待ち |
 | test_priority.py 作成 | 未着手 | 2026-09-13 | |
 | test_queue.py 作成 | 未着手 | 2026-09-13 | |
 | test_message_routing.py 作成 | 未着手 | 2026-09-13 | |

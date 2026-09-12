@@ -28,6 +28,18 @@ DISCORD_TOKEN="xxxxxxxxxx" python3 src/home.py
 - `mpv --no-video`(YouTube音声再生)
 - `yt-dlp`(mpv が内部で使用)
 
+## テストコマンド
+
+- AI(Claude)が自律的に実行してよいコマンド — モックで完結し、外部システム(実機のDiscord/
+  スピーカー/Pi)に影響しない
+  - `pip install -r requirements.txt`(テスト依存関係のインストール。初回のみ)
+  - `python -m pytest tests/`(ユニットテスト一式の実行)
+  - `python -m pytest tests/<ファイル名> -v`(個別ファイルの実行)
+- 人が実行するコマンド — 実機・実際の Discord/スピーカーに依存するため AI は自動実行しない
+  - `DISCORD_TOKEN="xxxxxxxxxx" python3 src/home.py`(実際に Discord へ接続して bot を起動)
+  - README.md の「疎通」コマンド(`open_jtalk` + `aplay` によるスピーカーの実音出力確認)
+  - `shutdown.sh` / `volume.sh`(Pi 実機の電源操作・音量調整)
+
 ## 運用スクリプト
 
 - `shutdown.sh` — `sudo poweroff`
