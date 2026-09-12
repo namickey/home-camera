@@ -11,7 +11,7 @@
       `client.run(TOKEN)`)を `if __name__ == "__main__":` ブロックに退避する。
       ロジック本体(`stop` / `run_and_wait` / `speak` / `play_youtube` /
       `clear_youtube_queue` / `youtube_worker` / `on_message` など)には手を入れない。
-- [ ] `requirements.txt` を作成し、依存パッケージを固定する
+- [x] `requirements.txt` を作成し、依存パッケージを固定する
       (`discord.py`, `pytest`, `pytest-asyncio`, `pytest-mock`)。
 - [ ] `tests/conftest.py` を作成し、`subprocess.Popen` / `subprocess.run` を
       モックする共通 fixture を用意する。
