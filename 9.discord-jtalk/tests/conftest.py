@@ -1,13 +1,6 @@
-import sys
-from pathlib import Path
-
 import pytest
 
-SRC_DIR = Path(__file__).resolve().parent.parent / "src"
-if str(SRC_DIR) not in sys.path:
-    sys.path.insert(0, str(SRC_DIR))
-
-import home  # noqa: E402
+import home
 
 
 class FakeProcess:
@@ -59,6 +52,20 @@ def mock_popen(monkeypatch):
 
     monkeypatch.setattr(home.subprocess, "Popen", fake_popen)
     return created
+
+
+@pytest.fixture
+def make_running_process():
+    """まだ終了していない(poll() が None を返す)FakeProcess を作るヘルパー。
+
+    優先度プリエンプションのテストで「再生中のプロセス」を再現するために使う。
+    """
+    def _make(cmd):
+        proc = FakeProcess(cmd)
+        proc.returncode = None
+        return proc
+
+    return _make
 
 
 @pytest.fixture

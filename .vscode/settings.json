@@ -1,0 +1,3 @@
+{
+    "python.analysis.extraPaths": ["./9.discord-jtalk/src"]
+}

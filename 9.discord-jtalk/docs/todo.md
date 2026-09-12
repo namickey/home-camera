@@ -15,8 +15,9 @@
       (`discord.py`, `pytest`, `pytest-asyncio`, `pytest-mock`)。
 - [x] `tests/conftest.py` を作成し、`subprocess.Popen` / `subprocess.run` を
       モックする共通 fixture を用意する。
-- [ ] テストに使用するコマンドを整理する。AIが実行するコマンド。人が実行するコマンド。
-- [ ] vscodeで発生している`conftest.py`でimportエラーに対処する。homeがimportできませんでした。
+- [x] テストに使用するコマンドを整理する。AIが実行するコマンド。人が実行するコマンド。
+- [x] vscodeで発生している`conftest.py`でimportエラーに対処する。`home`がimportできませんでした。
+- [x] vscodeで発生している`conftest.py`でimportエラーに対処する。`pytest`がimportできませんでした。
 - [ ] `tests/test_priority.py` を作成し、`run_and_wait` の優先度プリエンプションを検証する。
   - jtalk 再生中に YouTube が来ても割り込まない(`PRIORITY_JTALK` > `PRIORITY_YOUTUBE`)
   - YouTube 再生中に jtalk が来たら割り込んで停止・再生する
