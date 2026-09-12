@@ -13,7 +13,7 @@
       `clear_youtube_queue` / `youtube_worker` / `on_message` など)には手を入れない。
 - [x] `requirements.txt` を作成し、依存パッケージを固定する
       (`discord.py`, `pytest`, `pytest-asyncio`, `pytest-mock`)。
-- [ ] `tests/conftest.py` を作成し、`subprocess.Popen` / `subprocess.run` を
+- [x] `tests/conftest.py` を作成し、`subprocess.Popen` / `subprocess.run` を
       モックする共通 fixture を用意する。
 - [ ] `tests/test_priority.py` を作成し、`run_and_wait` の優先度プリエンプションを検証する。
   - jtalk 再生中に YouTube が来ても割り込まない(`PRIORITY_JTALK` > `PRIORITY_YOUTUBE`)
