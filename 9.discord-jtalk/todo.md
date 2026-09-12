@@ -1,0 +1,28 @@
+# TODO — ハーネスエンジニアリング
+
+9.discord-jtalk配下 でハーネスエンジニアリング開発スタイルで開発を行うための作業リスト。
+1件ずつ作業を行い、進捗状況を`progress.md`ファイルに反映する。
+
+- [ ] pythonソースコードをsrcディレクトリに移動する
+- [ ] `TODO.md` / `PROGRESS.md` をdocsディレクトリに移動する
+- [ ] `mei_normal.htsvoice`　ファイルを削除する
+- [ ] `home.py`: トップレベルの副作用(`TOKEN = os.environ["DISCORD_TOKEN"]` の取得、
+      `client.run(TOKEN)`)を `if __name__ == "__main__":` ブロックに退避する。
+      ロジック本体(`stop` / `run_and_wait` / `speak` / `play_youtube` /
+      `clear_youtube_queue` / `youtube_worker` / `on_message` など)には手を入れない。
+- [ ] `requirements.txt` を作成し、依存パッケージを固定する
+      (`discord.py`, `pytest`, `pytest-asyncio`, `pytest-mock`)。
+- [ ] `tests/conftest.py` を作成し、`subprocess.Popen` / `subprocess.run` を
+      モックする共通 fixture を用意する。
+- [ ] `tests/test_priority.py` を作成し、`run_and_wait` の優先度プリエンプションを検証する。
+  - jtalk 再生中に YouTube が来ても割り込まない(`PRIORITY_JTALK` > `PRIORITY_YOUTUBE`)
+  - YouTube 再生中に jtalk が来たら割り込んで停止・再生する
+  - 再生中のプロセスが無いときは素直に起動する
+- [ ] `tests/test_queue.py` を作成し、YouTube キュー周りを検証する。
+  - `clear_youtube_queue` がキューを空にする
+  - `youtube_worker` がキューから順番に取り出して再生する
+- [ ] `tests/test_message_routing.py` を作成し、`on_message` の分岐を検証する。
+  - `"停止"` → キュークリア + `stop()` 呼び出し
+  - `https://www.youtube.com/` で始まる → キューに投入
+  - それ以外 → `speak()` 呼び出し
+  - 対象外チャンネル / bot 自身のメッセージは無視される

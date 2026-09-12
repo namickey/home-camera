@@ -38,7 +38,7 @@ aplay ./tmp/test.wav
 トークンはコミットせず、環境変数で渡す。
 
 ```bash
-DISCORD_TOKEN="xxxxxxxxxx" python3 home.py
+DISCORD_TOKEN="xxxxxxxxxx" python3 src/home.py
 ```
 
 ## その他
