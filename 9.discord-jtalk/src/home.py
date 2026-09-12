@@ -1,6 +1,5 @@
 import discord, subprocess, tempfile, os, asyncio, threading
 
-TOKEN = os.environ["DISCORD_TOKEN"]
 CHANNEL_ID = 1547749134495383685
 
 client = discord.Client(intents=discord.Intents(messages=True, message_content=True, guilds=True))
@@ -87,4 +86,6 @@ async def on_message(msg):
         return
     await asyncio.to_thread(speak, msg.content)
 
-client.run(TOKEN)
+if __name__ == "__main__":
+    TOKEN = os.environ["DISCORD_TOKEN"]
+    client.run(TOKEN)
