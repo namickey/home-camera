@@ -28,7 +28,7 @@ sudo cp MMDAgent_Example-1.8/Voice/mei/*.htsvoice /usr/share/hts-voice/mei/
 ```bash
 echo "こんにちは、きこえますか" | open_jtalk \
   -x /var/lib/mecab/dic/open-jtalk/naist-jdic \
-  -m ./mei_normal.htsvoice \
+  -m /usr/share/hts-voice/mei/mei_normal.htsvoice \
   -ow ./tmp/test.wav
 aplay ./tmp/test.wav
 ```

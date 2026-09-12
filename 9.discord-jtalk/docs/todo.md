@@ -5,7 +5,7 @@
 作業が完了しコミットが完了したら、`todo.md`の作業をクローズ（チェックを付ける）する。
 
 - [x] pythonソースコードをsrcディレクトリに移動する
-- [ ] `TODO.md` / `PROGRESS.md` をdocsディレクトリに移動する
+- [x] `TODO.md` / `PROGRESS.md` をdocsディレクトリに移動する
 - [ ] `mei_normal.htsvoice`　ファイルを削除する
 - [ ] `home.py`: トップレベルの副作用(`TOKEN = os.environ["DISCORD_TOKEN"]` の取得、
       `client.run(TOKEN)`)を `if __name__ == "__main__":` ブロックに退避する。

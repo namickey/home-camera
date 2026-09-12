@@ -23,8 +23,7 @@ DISCORD_TOKEN="xxxxxxxxxx" python3 src/home.py
 ## 依存する外部コマンド(Pi 側にインストール済み前提)
 
 - `open_jtalk` + naist-jdic 辞書、音声モデルは `/usr/share/hts-voice/mei/mei_normal.htsvoice`
-  にシステムインストールされているものを使う(リポジトリ直下の `mei_normal.htsvoice` は
-  疎通確認用のローカルコピーで、本体コードからは参照していない)
+  にシステムインストールされているものを使う(導入手順は README.md 参照)
 - `aplay`(wav再生)
 - `mpv --no-video`(YouTube音声再生)
 - `yt-dlp`(mpv が内部で使用)
