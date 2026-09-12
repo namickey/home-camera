@@ -6,7 +6,7 @@
 |---|---|---|---|
 | pythonソースコードをsrcディレクトリに移動する | 完了 | 2026-09-13 | home.py / discordjtalk.py を `src/` へ移動(git mv)。README.md / CLAUDE.md の起動コマンドも `src/home.py` に更新 |
 | TODO.md / PROGRESS.md をdocsディレクトリに移動する | 完了 | 2026-09-13 | todo.md / progress.md を `docs/` へ移動(git mv)。参照リンクは相対パスのまま維持 |
-| mei_normal.htsvoice ファイルを削除する | 進行中 | 2026-09-13 | git rm で削除。README.md の疎通確認コマンドをシステムパス(`/usr/share/hts-voice/mei/mei_normal.htsvoice`)参照に修正、CLAUDE.md の記述も更新。コミット待ち |
+| mei_normal.htsvoice ファイルを削除する | 完了 | 2026-09-13 | git rm で削除。README.md の疎通確認コマンドをシステムパス(`/usr/share/hts-voice/mei/mei_normal.htsvoice`)参照に修正、CLAUDE.md の記述も更新 |
 | home.py の副作用を `__main__` ガード化 | 未着手 | 2026-09-13 | |
 | requirements.txt 作成 | 未着手 | 2026-09-13 | |
 | tests/conftest.py 作成 | 未着手 | 2026-09-13 | |

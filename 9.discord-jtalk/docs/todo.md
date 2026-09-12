@@ -6,7 +6,7 @@
 
 - [x] pythonソースコードをsrcディレクトリに移動する
 - [x] `TODO.md` / `PROGRESS.md` をdocsディレクトリに移動する
-- [ ] `mei_normal.htsvoice`　ファイルを削除する
+- [x] `mei_normal.htsvoice`　ファイルを削除する
 - [ ] `home.py`: トップレベルの副作用(`TOKEN = os.environ["DISCORD_TOKEN"]` の取得、
       `client.run(TOKEN)`)を `if __name__ == "__main__":` ブロックに退避する。
       ロジック本体(`stop` / `run_and_wait` / `speak` / `play_youtube` /
