@@ -35,9 +35,10 @@ aplay ./tmp/test.wav
 
 ### home.py / discordjtalk.py の実行
 
-トークンはコミットせず、環境変数で渡す。
+依存パッケージをインストールし、トークンはコミットせず環境変数で渡す。
 
 ```bash
+pip install -r requirements.txt
 DISCORD_TOKEN="xxxxxxxxxx" python3 src/home.py
 ```
 
