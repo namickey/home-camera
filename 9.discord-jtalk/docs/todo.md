@@ -2,8 +2,9 @@
 
 9.discord-jtalk配下 でハーネスエンジニアリング開発スタイルで開発を行うための作業リスト。
 1件ずつ作業を行い、進捗状況を`progress.md`ファイルに反映する。
+作業が完了しコミットが完了したら、`todo.md`の作業をクローズ（チェックを付ける）する。
 
-- [ ] pythonソースコードをsrcディレクトリに移動する
+- [x] pythonソースコードをsrcディレクトリに移動する
 - [ ] `TODO.md` / `PROGRESS.md` をdocsディレクトリに移動する
 - [ ] `mei_normal.htsvoice`　ファイルを削除する
 - [ ] `home.py`: トップレベルの副作用(`TOKEN = os.environ["DISCORD_TOKEN"]` の取得、
