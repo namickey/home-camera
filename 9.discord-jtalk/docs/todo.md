@@ -22,7 +22,7 @@
   - jtalk 再生中に YouTube が来ても割り込まない(`PRIORITY_JTALK` > `PRIORITY_YOUTUBE`)
   - YouTube 再生中に jtalk が来たら割り込んで停止・再生する
   - 再生中のプロセスが無いときは素直に起動する
-- [ ] テスト結果のwarning対応を行う
+- [x] テスト結果のwarning対応を行う
 - [ ] `tests/test_queue.py` を作成し、YouTube キュー周りを検証する。
   - `clear_youtube_queue` がキューを空にする
   - `youtube_worker` がキューから順番に取り出して再生する

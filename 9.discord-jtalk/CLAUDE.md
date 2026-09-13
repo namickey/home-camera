@@ -28,6 +28,15 @@ DISCORD_TOKEN="xxxxxxxxxx" python3 src/home.py
 - `mpv --no-video`(YouTube音声再生)
 - `yt-dlp`(mpv が内部で使用)
 
+## テスト方針
+
+Raspberry Pi 実機用のコードを Windows/CI 上でもテストできるよう、OS・ハードウェアに依存する
+部分(`subprocess.Popen`/`subprocess.run` による `open_jtalk`/`aplay`/`mpv` の実行、実際の
+Discord 接続)は全てモックし、依存しない部分(優先度プリエンプション・キュー処理・
+`on_message` の分岐ロジック)だけを検証する。`client.run(TOKEN)` は `if __name__ == "__main__":`
+に隔離してあるため `import home` してもDiscordには接続しない。実際の音声出力・Discord疎通は
+テストでは保証されず、実機での確認が必要(上記「テストコマンド」参照)。
+
 ## テストコマンド
 
 - AI(Claude)が自律的に実行してよいコマンド — モックで完結し、外部システム(実機のDiscord/
