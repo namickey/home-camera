@@ -26,7 +26,7 @@
 - [x] `tests/test_queue.py` を作成し、YouTube キュー周りを検証する。
   - `clear_youtube_queue` がキューを空にする
   - `youtube_worker` がキューから順番に取り出して再生する
-- [ ] `tests/test_message_routing.py` を作成し、`on_message` の分岐を検証する。
+- [x] `tests/test_message_routing.py` を作成し、`on_message` の分岐を検証する。
   - `"停止"` → キュークリア + `stop()` 呼び出し
   - `https://www.youtube.com/` で始まる → キューに投入
   - それ以外 → `speak()` 呼び出し
