@@ -14,7 +14,7 @@
 | vscodeのconftest.py importエラーに対処する | 完了 | 2026-09-13 | 原因はPylance(静的解析)が `conftest.py` 内の手動 `sys.path.insert` を解決できないこと。`pyproject.toml` に `[tool.pytest.ini_options] pythonpath = ["src"]` を追加してpytest側のパス解決を標準機構に置き換え、conftest.pyの手動sys.path操作を削除。VSCodeの実ワークスペースルートは `home-camera` 直下のため、`.vscode/settings.json`(`9.discord-jtalk/` の外、リポジトリ直下)に `python.analysis.extraPaths: ["./9.discord-jtalk/src"]` を追加してPylanceにもsrcを認識させた。pytest実行で動作確認済み(コミット前にスモークテスト削除)。ユーザー指示によりコミット保留中 |
 | test_priority.py 作成 | 完了 | 2026-09-13 | `run_and_wait` の3ケース(低優先度は割り込まない/高優先度は割り込んで再生/未実行時は素直に起動)を作成。conftest.pyに `make_running_process` フィクスチャ(実行中プロセスを模したFakeProcessを作るヘルパー)を追加。pytest実行で3件とも成功を確認済み |
 | テスト結果のwarning対応を行う | 完了 | 2026-09-13 | discord.py(2.7.1)の `@client.event` 内部実装が非推奨の `asyncio.iscoroutinefunction` を使っており、Python 3.14環境ではDeprecationWarningが出る。こちらのコードの問題ではなく直せないため、`pyproject.toml` の `filterwarnings` でこの特定の警告のみ無視するよう設定。warningなしで3件成功を確認済み |
-| test_queue.py 作成 | 未着手 | 2026-09-13 | |
+| test_queue.py 作成 | 完了 | 2026-09-13 | `clear_youtube_queue` がキューを空にすることを確認するテストと、`youtube_worker` がキューから順番に取り出して `play_youtube` に渡すことを確認する非同期テストを作成。後者は `home.play_youtube` を monkeypatch し、`asyncio.to_thread` 経由の呼び出しをポーリングで待機してからワーカータスクを cancel する構成。pytest実行で2件とも成功(warningなし)を確認済み |
 | test_message_routing.py 作成 | 未着手 | 2026-09-13 | |
 
 状態は `未着手` / `進行中` / `完了` / `保留` のいずれかを記入する。
