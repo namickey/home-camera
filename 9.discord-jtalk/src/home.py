@@ -43,12 +43,14 @@ def play_youtube(url):
 
 def speak(text):
     with tempfile.NamedTemporaryFile(suffix=".wav") as f:
-        subprocess.run(
+        result = subprocess.run(
             ["open_jtalk",
              "-x", "/var/lib/mecab/dic/open-jtalk/naist-jdic",
              "-m", "/usr/share/hts-voice/mei/mei_normal.htsvoice",
              "-ow", f.name],
             input=text.encode("utf-8"))
+        size = os.path.getsize(f.name)
+        print(f"[speak] open_jtalk returncode={result.returncode} wav={f.name} size={size}bytes")
         run_and_wait(["aplay", f.name], PRIORITY_JTALK)
 
 youtube_queue = asyncio.Queue()
