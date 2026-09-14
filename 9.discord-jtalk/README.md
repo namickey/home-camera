@@ -38,6 +38,12 @@ aplay ./tmp/test.wav
 依存パッケージをインストールし、トークンはコミットせず環境変数で渡す。
 
 ```bash
+sudo apt install pipx
+pipx install discord.py
+pipx install pytest
+pipx install pytest-asyncio
+pipx install pytest-mock
+
 pip install -r requirements.txt
 DISCORD_TOKEN="xxxxxxxxxx" python3 src/home.py
 ```

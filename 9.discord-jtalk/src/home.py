@@ -75,6 +75,7 @@ async def on_ready():
 
 @client.event
 async def on_message(msg):
+    print(f"[on_message] channel={msg.channel.id} author={msg.author} content={msg.content!r}")
     if msg.channel.id != CHANNEL_ID or msg.author.bot:
         return
     if msg.content == "停止":
