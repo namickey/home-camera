@@ -66,4 +66,15 @@ yt-dlp --version
 mpv --no-video https://www.youtube.com/xxxxxxxxxxxxxxxxxxx
 ```
 
+```
+cd ~/home-camera/9.discord-jtalk   # このプロジェクトのディレクトリで
 
+# 1. venv作成(初回のみ)
+python3 -m venv .venv
+
+# 2. 有効化(ターミナルを開くたびに必要)
+source .venv/bin/activate
+
+# 3. モジュールをインストール
+pip install -r requirements.txt
+```

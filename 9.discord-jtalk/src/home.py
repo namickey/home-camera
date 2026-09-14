@@ -42,7 +42,8 @@ def play_youtube(url):
     run_and_wait(["mpv", "--no-video", url], PRIORITY_YOUTUBE)
 
 def speak(text):
-    with tempfile.NamedTemporaryFile(suffix=".wav") as f:
+    # デバッグのため delete=False にして /tmp にwavファイルを残す(確認が終わったら delete=True に戻すこと)
+    with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
         result = subprocess.run(
             ["open_jtalk",
              "-x", "/var/lib/mecab/dic/open-jtalk/naist-jdic",
