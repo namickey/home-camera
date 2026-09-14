@@ -1,0 +1,16 @@
+[Unit]
+Description=Discord jtalk bot
+After=network-online.target sound.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/home-camera/9.discord-jtalk
+EnvironmentFile=/home/pi/home-camera/9.discord-jtalk/discord-jtalk.env
+ExecStart=/home/pi/home-camera/9.discord-jtalk/.venv/bin/python3 src/home.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

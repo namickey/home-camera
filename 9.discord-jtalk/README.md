@@ -78,3 +78,34 @@ source .venv/bin/activate
 # 3. モジュールをインストール
 pip install -r requirements.txt
 ```
+
+### 電源投入時にサービスとして自動起動
+
+トークンはリポジトリに含めず、`discord-jtalk.env` に実値を書いて渡す(`.gitignore`済み)。
+
+```bash
+cd ~/home-camera/9.discord-jtalk
+
+# 1. トークンファイルを作成(自分だけ読めるように)
+cp discord-jtalk.env.example discord-jtalk.env
+nano discord-jtalk.env   # DISCORD_TOKEN=実際のトークン に書き換える
+chmod 600 discord-jtalk.env
+
+# 2. venvがまだなら作成しておく(上記参照)
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+
+# 3. discord-jtalk.service の User= / WorkingDirectory= / ExecStart= / EnvironmentFile=
+#    のパスを自分の環境(ユーザー名・配置場所)に合わせて書き換える
+
+# 4. サービスとして登録
+sudo cp discord-jtalk.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now discord-jtalk
+
+# 5. 状態確認・ログ確認
+sudo systemctl status discord-jtalk
+journalctl -u discord-jtalk -f
+```
+
+音が出ない場合は `User=` で指定したユーザーが `audio` グループに入っているか確認する(`sudo usermod -aG audio <ユーザー名>` の上、再ログインまたは再起動)。
