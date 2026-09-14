@@ -42,17 +42,13 @@ def play_youtube(url):
     run_and_wait(["mpv", "--no-video", url], PRIORITY_YOUTUBE)
 
 def speak(text):
-    # デバッグのため delete=False にして /tmp にwavファイルを残す(確認が終わったら delete=True に戻すこと)
-    #with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
-    with tempfile.NamedTemporaryFile(suffix=".wav", delete=True) as f:
-        result = subprocess.run(
+    with tempfile.NamedTemporaryFile(suffix=".wav") as f:
+        subprocess.run(
             ["open_jtalk",
              "-x", "/var/lib/mecab/dic/open-jtalk/naist-jdic",
              "-m", "/usr/share/hts-voice/mei/mei_normal.htsvoice",
              "-ow", f.name],
             input=text.encode("utf-8"))
-        size = os.path.getsize(f.name)
-        print(f"[speak] open_jtalk returncode={result.returncode} wav={f.name} size={size}bytes")
         run_and_wait(["aplay", f.name], PRIORITY_JTALK)
 
 youtube_queue = asyncio.Queue()
@@ -79,7 +75,6 @@ async def on_ready():
 
 @client.event
 async def on_message(msg):
-    print(f"[on_message] channel={msg.channel.id} author={msg.author} content={msg.content!r}")
     if msg.channel.id != CHANNEL_ID or msg.author.bot:
         return
     if msg.content == "停止":
