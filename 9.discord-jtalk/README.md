@@ -1,5 +1,23 @@
 # discord + jtalk
 
+## やりたいこと
+
+- 外出先から家族に急な連絡があるが、家族がスマホを部屋に置いて、リビングでテレビを見ているため、つながらない。
+- 外出先から送信したテキストメッセージを、自宅リビングで再生して伝えたい。
+
+## コンセプト
+
+- テキストメッセージを外出先から、自宅へ送信する
+  - `Discord`を使う
+  - `Discord`の`BOT`を使う
+  - `Discord`のPythonクライアントライブラリを使う
+- テキストメッセージを音声ファイルに変換する
+  - `jtalk`を使う
+- 音声ファイルを再生する
+- `Raspberry Pi`+`Linux OS`を使う
+
+## jtalk
+
 ### jtalkインストール
 ```bash
 sudo apt install open-jtalk open-jtalk-mecab-naist-jdic
@@ -33,40 +51,32 @@ echo "こんにちは、きこえますか" | open_jtalk \
 aplay ./tmp/test.wav
 ```
 
+## discord
+
+```python
+client = discord.Client(intents=discord.Intents(messages=True, message_content=True, guilds=True))
+
+@client.event
+async def on_message(msg):
+    if msg.channel.id != CHANNEL_ID or msg.author.bot:
+        return
+    with tempfile.NamedTemporaryFile(suffix=".wav") as f:
+        subprocess.run(
+            ["open_jtalk",
+             "-x", "/var/lib/mecab/dic/open-jtalk/naist-jdic",
+             "-m", "/usr/share/hts-voice/mei/mei_normal.htsvoice",
+             "-ow", f.name],
+            input=msg.content.encode("utf-8"))
+        subprocess.run(["aplay", f.name])
+
+client.run(TOKEN)
+```
+
 ### home.py / discordjtalk.py の実行
 
 依存パッケージをインストールし、トークンはコミットせず環境変数で渡す。
 
 ```bash
-sudo apt install pipx
-pipx install discord.py
-pipx install pytest
-pipx install pytest-asyncio
-pipx install pytest-mock
-
-pip install -r requirements.txt
-DISCORD_TOKEN="xxxxxxxxxx" python3 src/home.py
-```
-
-## その他
-
-```bash
-sudo apt install mpv
-
-# 古いyoutube-dlが入っていれば削除
-sudo apt remove youtube-dl
-
-# yt-dlpを最新版でインストール
-sudo apt install python3-pip
-pip3 install --break-system-packages -U yt-dlp
-
-# パスが通っているか確認（~/.local/bin に入る）
-yt-dlp --version
-
-mpv --no-video https://www.youtube.com/xxxxxxxxxxxxxxxxxxx
-```
-
-```
 cd ~/home-camera/9.discord-jtalk   # このプロジェクトのディレクトリで
 
 # 1. venv作成(初回のみ)
@@ -78,6 +88,12 @@ source .venv/bin/activate
 # 3. モジュールをインストール
 pip install -r requirements.txt
 ```
+
+```bash
+DISCORD_TOKEN="xxxxxxxxxx" python3 src/home.py
+```
+
+
 
 ### 電源投入時にサービスとして自動起動
 
@@ -109,3 +125,22 @@ journalctl -u discord-jtalk -f
 ```
 
 音が出ない場合は `User=` で指定したユーザーが `audio` グループに入っているか確認する(`sudo usermod -aG audio <ユーザー名>` の上、再ログインまたは再起動)。
+
+
+## その他
+
+```bash
+sudo apt install mpv
+
+# 古いyoutube-dlが入っていれば削除
+sudo apt remove youtube-dl
+
+# yt-dlpを最新版でインストール
+sudo apt install python3-pip
+pip3 install --break-system-packages -U yt-dlp
+
+# パスが通っているか確認（~/.local/bin に入る）
+yt-dlp --version
+
+mpv --no-video https://www.youtube.com/xxxxxxxxxxxxxxxxxxx
+```
