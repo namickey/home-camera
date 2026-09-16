@@ -23,7 +23,7 @@
 sudo apt install open-jtalk open-jtalk-mecab-naist-jdic
 ```
 
-### 音声ダウンロード
+### 音声モデルのダウンロード
 ```bash
 # 1. 作業用ディレクトリで、MMDAgentのサンプルパッケージをダウンロード
 cd /tmp
@@ -32,32 +32,54 @@ wget https://sourceforge.net/projects/mmdagent/files/MMDAgent_Example/MMDAgent_E
 # 2. 解凍（unzipが無ければ sudo apt install unzip）
 unzip MMDAgent_Example-1.8.zip
 
-# 3. 中身を確認 — Voice/mei/ フォルダに声のデータが入っている
+# 3. 中身を確認 — Voice/mei/ フォルダに音声モデル（声のデータ）が入っている
 ls MMDAgent_Example-1.8/Voice/mei/
 # mei_angry.htsvoice  mei_bashful.htsvoice  mei_happy.htsvoice
 # mei_normal.htsvoice  mei_sad.htsvoice  などが見えるはず
 
-# 4. システムの音声フォルダにコピー（「配置」とはこの操作のこと）
+# 4. システムの音声フォルダを作成して、コピー配置
 sudo mkdir -p /usr/share/hts-voice/mei
 sudo cp MMDAgent_Example-1.8/Voice/mei/*.htsvoice /usr/share/hts-voice/mei/
 ```
 
 ### 疎通
 ```bash
+# テキストから、wavファイルの生成
 echo "こんにちは、きこえますか" | open_jtalk \
   -x /var/lib/mecab/dic/open-jtalk/naist-jdic \
   -m /usr/share/hts-voice/mei/mei_normal.htsvoice \
   -ow ./tmp/test.wav
+
+# wavファイルの再生
 aplay ./tmp/test.wav
 ```
 
 ## discord
+
+### インストール
+
+```bash
+# 1.  このプロジェクトのディレクトリに移動する
+cd ~/home-camera/9.discord-jtalk
+
+# 2. venv作成(初回のみ)
+python3 -m venv .venv
+
+# 3. 有効化(ターミナルを開くたびに必要)
+source .venv/bin/activate
+
+# 4. モジュールをインストール
+pip install -r requirements.txt
+```
+
+### 最小限の実装イメージ
 
 ```python
 client = discord.Client(intents=discord.Intents(messages=True, message_content=True, guilds=True))
 
 @client.event
 async def on_message(msg):
+    # 「指定チャネル」かつ「人が投稿したメッセージ（ボット以外）」であること
     if msg.channel.id != CHANNEL_ID or msg.author.bot:
         return
     with tempfile.NamedTemporaryFile(suffix=".wav") as f:
@@ -72,32 +94,20 @@ async def on_message(msg):
 client.run(TOKEN)
 ```
 
-### home.py / discordjtalk.py の実行
+### コマンド起動
 
-依存パッケージをインストールし、トークンはコミットせず環境変数で渡す。
-
-```bash
-cd ~/home-camera/9.discord-jtalk   # このプロジェクトのディレクトリで
-
-# 1. venv作成(初回のみ)
-python3 -m venv .venv
-
-# 2. 有効化(ターミナルを開くたびに必要)
-source .venv/bin/activate
-
-# 3. モジュールをインストール
-pip install -r requirements.txt
-```
+- サービス起動ではなく、手動でコマンドでの起動を行う場合
+- DiscordのBOT用トークンはソースコード内に記載せず、環境変数で渡す。
+- 「変数名=値」という構文で実行すると、環境変数に登録される。後続に通常コマンドを記載することも可能。
 
 ```bash
 DISCORD_TOKEN="xxxxxxxxxx" python3 src/home.py
 ```
 
+### サービス起動
 
-
-### 電源投入時にサービスとして自動起動
-
-トークンはリポジトリに含めず、`discord-jtalk.env` に実値を書いて渡す(`.gitignore`済み)。
+- RaspberryPiのOS起動時に、サービスとして自動起動させる
+- BOT用トークンはリポジトリに含めず、`discord-jtalk.env` にトークン値を書いて受け渡す(`.gitignore`済み)。
 
 ```bash
 cd ~/home-camera/9.discord-jtalk
@@ -128,6 +138,8 @@ journalctl -u discord-jtalk -f
 
 
 ## その他
+
+### youtubeを再生したい
 
 ```bash
 sudo apt install mpv
