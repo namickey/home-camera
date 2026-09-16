@@ -1,6 +1,11 @@
-import discord, subprocess, tempfile, os, asyncio, threading
+import discord, subprocess, tempfile, os, asyncio, threading, re
 
 CHANNEL_ID = 1547749134495383685
+
+# スマホのYouTubeアプリの共有機能では www. が付かない youtube.com や
+# m.youtube.com、短縮URLの youtu.be で共有されることがあるため、
+# それらもYouTube URLとして認識する。
+YOUTUBE_URL_RE = re.compile(r"^https://(www\.|m\.)?youtube\.com/|^https://youtu\.be/")
 
 client = discord.Client(intents=discord.Intents(messages=True, message_content=True, guilds=True))
 
@@ -81,7 +86,7 @@ async def on_message(msg):
         clear_youtube_queue()
         await asyncio.to_thread(stop)
         return
-    if msg.content.startswith("https://www.youtube.com/"):
+    if YOUTUBE_URL_RE.match(msg.content):
         for url in msg.content.splitlines():
             url = url.strip()
             if url:

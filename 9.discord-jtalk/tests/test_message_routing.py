@@ -52,6 +52,26 @@ async def test_multiple_youtube_urls_are_queued_one_by_one(monkeypatch):
 
 
 @pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://youtu.be/abc123",
+        "https://youtube.com/watch?v=abc123",
+        "https://m.youtube.com/watch?v=abc123",
+        "https://youtube.com/shorts/abc123",
+    ],
+)
+async def test_mobile_app_shared_youtube_url_is_queued_not_spoken(monkeypatch, url):
+    speak_calls = []
+    monkeypatch.setattr(home, "speak", lambda text: speak_calls.append(text))
+
+    await home.on_message(make_message(url))
+
+    assert home.youtube_queue.get_nowait() == url
+    assert speak_calls == []
+
+
+@pytest.mark.asyncio
 async def test_other_text_is_spoken(monkeypatch):
     speak_calls = []
     monkeypatch.setattr(home, "speak", lambda text: speak_calls.append(text))

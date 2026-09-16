@@ -33,4 +33,4 @@
   - 対象外チャンネル / bot 自身のメッセージは無視される
 - [x] discordで、youtubeのURLが複数件投稿された場合には、1件ずつキューに入れてください。
   - youtubeのURLは改行で区切られている前提としてください。
-- [ ] スマホのyoutubeアプリから連携した場合、URLが`https://www.youtube.com/`で始まらないため、youtubeが再生されない。
+- [x] スマホのyoutubeアプリから連携した場合、URLが`https://www.youtube.com/`で始まらないため、youtubeが再生されない。
