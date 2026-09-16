@@ -16,5 +16,6 @@
 | テスト結果のwarning対応を行う | 完了 | 2026-09-13 | discord.py(2.7.1)の `@client.event` 内部実装が非推奨の `asyncio.iscoroutinefunction` を使っており、Python 3.14環境ではDeprecationWarningが出る。こちらのコードの問題ではなく直せないため、`pyproject.toml` の `filterwarnings` でこの特定の警告のみ無視するよう設定。warningなしで3件成功を確認済み |
 | test_queue.py 作成 | 完了 | 2026-09-13 | `clear_youtube_queue` がキューを空にすることを確認するテストと、`youtube_worker` がキューから順番に取り出して `play_youtube` に渡すことを確認する非同期テストを作成。後者は `home.play_youtube` を monkeypatch し、`asyncio.to_thread` 経由の呼び出しをポーリングで待機してからワーカータスクを cancel する構成。pytest実行で2件とも成功(warningなし)を確認済み |
 | test_message_routing.py 作成 | 完了 | 2026-09-13 | `on_message` の4分岐(「停止」でキュークリア+`stop()`、YouTube URLでキュー投入、それ以外は`speak()`、対象外チャンネル/bot自身は無視)を検証。`SimpleNamespace` でDiscordの `Message`/`Channel`/`Author` を模したフェイクを作成し、`home.stop`/`home.speak` を monkeypatch して呼び出しを記録する構成。pytest実行で5件とも成功(warningなし)を確認済み |
+| 複数件のYouTube URL(改行区切り)を1件ずつキューに入れる | 完了 | 2026-09-17 | `on_message` のYouTube分岐で `msg.content.splitlines()` により行ごとに分割し、空行を除いて `youtube_queue` に順番に投入するよう変更(`home.py`)。`test_message_routing.py` に3件のURLが順番にキューへ入ることを検証するテストを追加。pytest実行で11件とも成功(warningなし)を確認済み |
 
 状態は `未着手` / `進行中` / `完了` / `保留` のいずれかを記入する。

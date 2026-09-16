@@ -37,6 +37,21 @@ async def test_youtube_url_is_queued_not_spoken(monkeypatch):
 
 
 @pytest.mark.asyncio
+async def test_multiple_youtube_urls_are_queued_one_by_one(monkeypatch):
+    speak_calls = []
+    monkeypatch.setattr(home, "speak", lambda text: speak_calls.append(text))
+    content = "https://www.youtube.com/watch?v=1\nhttps://www.youtube.com/watch?v=2\nhttps://www.youtube.com/watch?v=3"
+
+    await home.on_message(make_message(content))
+
+    assert home.youtube_queue.get_nowait() == "https://www.youtube.com/watch?v=1"
+    assert home.youtube_queue.get_nowait() == "https://www.youtube.com/watch?v=2"
+    assert home.youtube_queue.get_nowait() == "https://www.youtube.com/watch?v=3"
+    assert home.youtube_queue.empty()
+    assert speak_calls == []
+
+
+@pytest.mark.asyncio
 async def test_other_text_is_spoken(monkeypatch):
     speak_calls = []
     monkeypatch.setattr(home, "speak", lambda text: speak_calls.append(text))

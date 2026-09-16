@@ -82,7 +82,10 @@ async def on_message(msg):
         await asyncio.to_thread(stop)
         return
     if msg.content.startswith("https://www.youtube.com/"):
-        youtube_queue.put_nowait(msg.content)
+        for url in msg.content.splitlines():
+            url = url.strip()
+            if url:
+                youtube_queue.put_nowait(url)
         return
     await asyncio.to_thread(speak, msg.content)
 
