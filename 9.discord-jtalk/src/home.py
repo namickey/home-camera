@@ -3,7 +3,7 @@ from datetime import datetime
 
 CHANNEL_ID = 1547749134495383685
 
-# スケジュールファイル: 1行 = "yyyy/mm/dd hh:mm:ss|メッセージ|true/false"。
+# スケジュールファイル: 1行 = "yyyy/mm/dd hh:mm:ss|true/false|メッセージ"。
 # `#` で始まる行・カラム数が合わない行は無視する。
 SCHEDULE_FILE = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "schedule.txt")
@@ -70,7 +70,7 @@ def parse_schedule_line(line):
     parts = line.split("|")
     if len(parts) != 3:
         return None
-    dt_str, message, enabled_str = (p.strip() for p in parts)
+    dt_str, enabled_str, message = (p.strip() for p in parts)
     try:
         dt = datetime.strptime(dt_str, "%Y/%m/%d %H:%M:%S")
     except ValueError:

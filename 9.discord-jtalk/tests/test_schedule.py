@@ -7,7 +7,7 @@ import home
 
 
 def test_parse_schedule_line_valid():
-    result = home.parse_schedule_line("2026/09/25 08:00:00|おはよう|true")
+    result = home.parse_schedule_line("2026/09/25 08:00:00|true|おはよう")
 
     assert result == (datetime(2026, 9, 25, 8, 0, 0), "おはよう", True)
 
@@ -22,7 +22,7 @@ def test_parse_schedule_line_valid():
 ])
 def test_parse_schedule_line_enabled_flag_case_insensitive(enabled_str, expected):
     dt, message, enabled = home.parse_schedule_line(
-        f"2026/09/25 08:00:00|おはよう|{enabled_str}")
+        f"2026/09/25 08:00:00|{enabled_str}|おはよう")
 
     assert enabled is expected
 
@@ -31,9 +31,9 @@ def test_parse_schedule_line_enabled_flag_case_insensitive(enabled_str, expected
     "",
     "   ",
     "# コメント行",
-    "2026/09/25 08:00:00|おはよう",  # カラム数不足
-    "2026/09/25 08:00:00|おはよう|true|余分",  # カラム数超過
-    "2026/13/99 99:99:99|おはよう|true",  # 不正な日時
+    "2026/09/25 08:00:00|true",  # カラム数不足
+    "2026/09/25 08:00:00|true|おはよう|余分",  # カラム数超過
+    "2026/13/99 99:99:99|true|おはよう",  # 不正な日時
 ])
 def test_parse_schedule_line_invalid_returns_none(line):
     assert home.parse_schedule_line(line) is None
@@ -43,9 +43,9 @@ def test_load_schedule_entries_skips_invalid_lines(tmp_path):
     schedule_file = tmp_path / "schedule.txt"
     schedule_file.write_text(
         "# コメント\n"
-        "2026/09/25 08:00:00|おはよう|true\n"
+        "2026/09/25 08:00:00|true|おはよう\n"
         "不正な行\n"
-        "2026/09/26 20:00:00|おやすみ|false\n",
+        "2026/09/26 20:00:00|false|おやすみ\n",
         encoding="utf-8")
 
     entries = home.load_schedule_entries(str(schedule_file))

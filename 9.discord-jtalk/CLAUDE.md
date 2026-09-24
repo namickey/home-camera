@@ -12,7 +12,7 @@ open_jtalk で読み上げ、YouTube URL が投稿されたら mpv で音声再�
   - YouTube URL は `asyncio.Queue` でキューイングして順に再生
   - `"停止"` というメッセージでキュー全クリア+再生中プロセスを止める
   - プロジェクト直下の `schedule.txt`(`.gitignore`済み、`schedule.txt.example`参照)を
-    60秒間隔でポーリングし、指定日時(`yyyy/mm/dd hh:mm:ss|メッセージ|true/false`)を
+    60秒間隔でポーリングし、指定日時(`yyyy/mm/dd hh:mm:ss|true/false|メッセージ`)を
     過ぎた有効なエントリを読み上げる(`schedule_worker`)
 - `src/discordjtalk.py` — 初期プロトタイプ。トークン/チャンネルIDがプレースホルダーの
   ままで `home.py` に置き換えられた旧版。参照用として残っているだけで実行対象ではない。
