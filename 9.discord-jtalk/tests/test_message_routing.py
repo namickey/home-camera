@@ -26,6 +26,37 @@ async def test_stop_message_clears_queue_and_stops(monkeypatch):
 
 
 @pytest.mark.asyncio
+async def test_list_message_clears_queue_then_queues_enabled_urls_in_order(monkeypatch):
+    home.youtube_queue.put_nowait("https://www.youtube.com/watch?v=old")
+    monkeypatch.setattr(
+        home, "load_youtube_list_entries",
+        lambda *a, **kw: [
+            (True, "https://www.youtube.com/watch?v=1"),
+            (False, "https://www.youtube.com/watch?v=2"),
+            (True, "https://www.youtube.com/watch?v=3"),
+        ])
+    speak_calls = []
+    monkeypatch.setattr(home, "speak", lambda text: speak_calls.append(text))
+
+    await home.on_message(make_message("list"))
+
+    assert home.youtube_queue.get_nowait() == "https://www.youtube.com/watch?v=1"
+    assert home.youtube_queue.get_nowait() == "https://www.youtube.com/watch?v=3"
+    assert home.youtube_queue.empty()
+    assert speak_calls == []
+
+
+@pytest.mark.asyncio
+async def test_list_message_with_missing_file_results_in_empty_queue(monkeypatch):
+    home.youtube_queue.put_nowait("https://www.youtube.com/watch?v=old")
+    monkeypatch.setattr(home, "load_youtube_list_entries", lambda *a, **kw: [])
+
+    await home.on_message(make_message("list"))
+
+    assert home.youtube_queue.empty()
+
+
+@pytest.mark.asyncio
 async def test_youtube_url_is_queued_not_spoken(monkeypatch):
     speak_calls = []
     monkeypatch.setattr(home, "speak", lambda text: speak_calls.append(text))

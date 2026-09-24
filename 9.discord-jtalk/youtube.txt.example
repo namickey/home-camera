@@ -1,0 +1,7 @@
+# YouTubeリストファイル(実体の youtube.txt は .gitignore 済み。このファイルをコピーして使う)
+# 1行 = "true(有効)/false(無効)|URL"
+# `#` で始まる行、カラム数が合わない行は無視される。
+# Discordで「list」とだけ投稿すると、有効なURLが上から順にキューへ投入される
+# (投入前に既存の再生キューはクリアされる)。
+true|https://www.youtube.com/watch?v=xxxxxxxxxxx
+false|https://www.youtube.com/watch?v=yyyyyyyyyyy

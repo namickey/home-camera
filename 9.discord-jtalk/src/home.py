@@ -9,6 +9,11 @@ SCHEDULE_FILE = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "schedule.txt")
 SCHEDULE_POLL_INTERVAL_SEC = 60
 
+# YouTubeリストファイル: 1行 = "true/false|URL"。
+# `#` で始まる行・カラム数が合わない行は無視する。
+YOUTUBE_LIST_FILE = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "youtube.txt")
+
 # スマホのYouTubeアプリの共有機能では www. が付かない youtube.com や
 # m.youtube.com、短縮URLの youtu.be で共有されることがあるため、
 # それらもYouTube URLとして認識する。
@@ -103,6 +108,33 @@ async def schedule_worker():
             await asyncio.to_thread(speak, message)
         last_checked = now
 
+def parse_youtube_list_line(line):
+    line = line.strip()
+    if not line or line.startswith("#"):
+        return None
+    parts = line.split("|")
+    if len(parts) != 2:
+        return None
+    enabled_str, url = (p.strip() for p in parts)
+    if not url:
+        return None
+    return enabled_str.lower() == "true", url
+
+def load_youtube_list_entries(path=None):
+    entries = []
+    path = path or YOUTUBE_LIST_FILE
+    if not os.path.exists(path):
+        return entries
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            parsed = parse_youtube_list_line(line)
+            if parsed:
+                entries.append(parsed)
+    return entries
+
+def enabled_youtube_urls(entries):
+    return [url for enabled, url in entries if enabled]
+
 youtube_queue = asyncio.Queue()
 youtube_worker_started = False
 schedule_worker_started = False
@@ -136,6 +168,11 @@ async def on_message(msg):
     if msg.content == "停止":
         clear_youtube_queue()
         await asyncio.to_thread(stop)
+        return
+    if msg.content == "list":
+        clear_youtube_queue()
+        for url in enabled_youtube_urls(load_youtube_list_entries()):
+            youtube_queue.put_nowait(url)
         return
     if YOUTUBE_URL_RE.match(msg.content):
         for url in msg.content.splitlines():

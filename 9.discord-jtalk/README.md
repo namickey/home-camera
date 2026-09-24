@@ -172,3 +172,16 @@ mpv --no-video https://www.youtube.com/xxxxxxxxxxxxxxxxxxx
 cp schedule.txt.example schedule.txt
 nano schedule.txt
 ```
+
+### YouTubeのお気に入りリストをまとめて再生したい
+
+- プロジェクト直下に `youtube.txt` を置くと、Discordで「list」とだけ投稿したときに
+  有効な URL が上から順に再生キューへ投入される(投入前に既存のキューはクリアされる)。
+- `youtube.txt` は `.gitignore` 済み。`youtube.txt.example` をコピーして使う。
+- 1行のフォーマット: `true(有効)/false(無効)|URL`
+- `#` で始まる行、カラム数が合わない行は無視される。
+
+```bash
+cp youtube.txt.example youtube.txt
+nano youtube.txt
+```

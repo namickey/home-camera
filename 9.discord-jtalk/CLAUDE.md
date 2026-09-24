@@ -14,6 +14,9 @@ open_jtalk で読み上げ、YouTube URL が投稿されたら mpv で音声再�
   - プロジェクト直下の `schedule.txt`(`.gitignore`済み、`schedule.txt.example`参照)を
     60秒間隔でポーリングし、指定日時(`yyyy/mm/dd hh:mm:ss|true/false|メッセージ`)を
     過ぎた有効なエントリを読み上げる(`schedule_worker`)
+  - `"list"` というメッセージで、プロジェクト直下の `youtube.txt`(`.gitignore`済み、
+    `youtube.txt.example`参照、`true/false|URL`形式)に記載された有効なURLを、
+    既存の再生キューをクリアした上で上から順にキューへ投入する
 - `src/discordjtalk.py` — 初期プロトタイプ。トークン/チャンネルIDがプレースホルダーの
   ままで `home.py` に置き換えられた旧版。参照用として残っているだけで実行対象ではない。
 
