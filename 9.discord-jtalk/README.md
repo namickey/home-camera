@@ -156,3 +156,19 @@ yt-dlp --version
 
 mpv --no-video https://www.youtube.com/xxxxxxxxxxxxxxxxxxx
 ```
+
+### 指定日時にメッセージを読み上げたい(スケジュール機能)
+
+- プロジェクト直下に `schedule.txt` を置くと、bot が60秒間隔でファイルを読み込み、
+  指定日時になったタイミングでメッセージを読み上げる。
+- `schedule.txt` は `.gitignore` 済み(個人のスケジュールのため)。
+  `schedule.txt.example` をコピーして使う。
+- 1行のフォーマット: `yyyy/mm/dd hh:mm:ss|メッセージ|true(有効)/false(無効)`
+- `#` で始まる行、カラム数が合わない行、日時が不正な行は無視される。
+- 指定日時を過ぎたエントリは、有効フラグが `true` のままでも再度読み上げられることはない
+  (ファイルは書き換えない。起動中に一度だけ読み上げ判定の対象になる仕組み)。
+
+```bash
+cp schedule.txt.example schedule.txt
+nano schedule.txt
+```
